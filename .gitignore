@@ -3,3 +3,4 @@ config/*
 
 # But don't ignore the config folder itself
 !config/
+firebase-adminsdk
