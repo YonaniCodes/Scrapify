@@ -1,4 +1,5 @@
-from database import *
+from database import register_scraped_website, register_unscraped_website, get_all_scraped_websites, get_all_unscraped_websites
+
 
 def scrape():
     # Register the website as both scraped and unscraped
