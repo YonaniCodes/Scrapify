@@ -38,3 +38,14 @@ This is where your actual code lives. It should include:
 - (Optional) `parsers/`: separate logic for parsing different types of pages
 
 > 🎯 Keeping logic in `src/` means your code can be easily tested, reused, and extended.
+
+## Contributing
+
+We welcome contributions from the community! To contribute:
+
+1. Fork the repository.
+2. Clone your forked repository to your local machine.
+3. Create a new branch to work on your changes.
+4. Make your changes and test them.
+5. Push your changes to your forked repository.
+6. Create a pull request describing the changes.
