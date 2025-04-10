@@ -5,16 +5,6 @@ from database import (
     get_all_unscraped_websites,
     is_registered
 )
-
-import os
-import re
-import json
-import requests
-from bs4 import BeautifulSoup
-import fitz  # PyMuPDF
-from googlesearch import search
-import pytesseract
-from pdf2image import convert_from_bytes
 headers = {'User-Agent': 'Mozilla/5.0'}
 from functions import (
     amharic_only,
@@ -55,5 +45,18 @@ def scrape(urls, scraper="unknown"):
             register_scraped_website(url, scraper)
         else:
             print("no data")
-all_urls =list(set(["https://www.abyssinialaw.com/online-resources/quick-links/the-ethiopian-constitution-amharic-version"]))
-scrape(all_urls,"Biruk")
+
+
+from datetime import datetime
+
+class ScrapeManager:
+    def __init__(self):
+        self.scraped = []
+        self.unscraped = []
+    def get_scraped(self):
+        """Returns the list of scraped websites."""
+        return self.scraped
+
+    def get_unscraped(self):
+        """Returns the list of unscraped websites."""
+        return self.unscraped

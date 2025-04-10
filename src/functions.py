@@ -1,17 +1,12 @@
 import re
-from googleapiclient.discovery import build
-import pytesseract
-from pdf2image import convert_from_bytes
 import requests
 import json
 import os
-import requestsss
+import requests
 from bs4 import BeautifulSoup
 import fitz  # PyMuPDF
 import json
-from googlesearch import search
-
-from database import is_registered
+ 
 headers = {'User-Agent': 'Mozilla/5.0'}
 
 # --- 1. extract from web ---
