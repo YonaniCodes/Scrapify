@@ -1,8 +1,6 @@
-# Ignore everything inside the config folder
-config/*
 **/__pycache__/
 
-# But don't ignore the config folder itself
-!config/
+ 
 firebase-adminsdk.json
-data
+data/pdf/*
+data/extracted_data.jsonl

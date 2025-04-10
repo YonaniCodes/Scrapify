@@ -15,6 +15,7 @@ from functions import (
 )
 
 def scrape(urls, scraper="unknown"):
+ 
     for url in urls:
         print(f"Processing: {url}")
         
@@ -32,32 +33,28 @@ def scrape(urls, scraper="unknown"):
             register_unscraped_website(url,str(e))
             continue  # Don't stop the whole process for one bad URL
         # print(content)
-        amharic_content = amharic_only(content)
-        if amharic_content!="":
-            # print(amharic_content)
-            record = {
-                "url": url,
-                "scraper": scraper,
-                "content": amharic_content[:2000]  # Truncate long texts
-            }
+        try:
+            amharic_content = amharic_only(content)
+            if amharic_content:  # No need to compare with "" explicitly, just check if it's truthy
+                # print(amharic_content)  # Uncomment if you want to inspect the content
+                record = {
+                    "url": url,
+                    "scraper": scraper,
+                    "content": amharic_content[:2000]  # Truncate long texts
+                }
 
-            save_to_jsonl([record])  # Save as a list of one dict (for JSONL)
-            register_scraped_website(url, scraper)
-        else:
-            print("no data")
+                save_to_jsonl([record])  # Save as a list of one dict (for JSONL)
+                register_scraped_website(url, scraper)
+
+        except Exception as e:
+            register_unscraped_website(url, str(e))
+
+       
+       
 
 
-scrape(["https://ndcoilknkl"])
-class ScrapeManager:
-    def __init__(self):
-        self.scraped = get_all_scraped_websites()
-        self.unscraped = get_all_unscraped_websites()
-    def get_scraped(self):
-        """Returns the list of scraped websites."""
-        return self.scraped
+def get_report():
+    scraped_websites = get_all_scraped_websites()
+    unscraped_websites = get_all_unscraped_websites()
+    return scraped_websites,unscraped_websites
 
-    def get_unscraped(self):
-        """Returns the list of unscraped websites."""
-        return self.unscraped
-
-scrape(["https://fetena.net/books_asset/books_27/collection/grade%2010-amharic_fetena_net_1096.pdf"])

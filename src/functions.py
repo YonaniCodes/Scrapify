@@ -6,6 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 import  fitz  # PyMuPDF
 import json
+import langid
  
 headers = {'User-Agent': 'Mozilla/5.0'}
 
@@ -67,9 +68,20 @@ def save_to_json(data, filename="data/extracted_data.json"):
         json.dump(data, f, indent=2, ensure_ascii=False)
     print(f"Saved to {filename}")
  
+import re
+import langid
+
 def amharic_only(text):
-  amhariconly=re.findall(r'[\u1200-\u137F\s፡።፣፤፥፦፧፨]+', text)
-  return " ".join(amhariconly).strip()
+    # Extract Amharic script characters
+    amhariconly = re.findall(r'[\u1200-\u137F፡።፣፤፥፦፧፨]+', text.replace('\n', ''))
+    joined = " ".join(amhariconly).strip()
+
+    # Language detection on the extracted Amharic-looking text
+    if not joined or langid.classify(joined)[0] != "am":
+        raise ValueError("Input contains amharic chracter but not amaharic languge.")
+
+    return joined
+
 
 def save_to_jsonl(data, filename="data/extracted_data.jsonl"):
     # Create the directory if it doesn't exist
