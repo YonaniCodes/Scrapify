@@ -4,7 +4,7 @@ import json
 import os
 import requests
 from bs4 import BeautifulSoup
-import fitz  # PyMuPDF
+import  fitz  # PyMuPDF
 import json
  
 headers = {'User-Agent': 'Mozilla/5.0'}
@@ -42,11 +42,13 @@ def extract_from_web(url):
 def extract_from_pdf(url):
     response = requests.get(url, timeout=10, headers=headers)
     response.raise_for_status()  # Throws an error for bad responses (e.g. 404, 500)
-
-    with open("data/pdf/temp.pdf", "wb") as f:
+    
+    filename= "data/pdf/temp.pdf"
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    with open(filename, "wb") as f:
         f.write(response.content)
 
-    doc = fitz.open("data/pdf/temp.pdf")
+    doc = fitz.open(filename)
     text = ""
     for page in doc:
         text += page.get_text()

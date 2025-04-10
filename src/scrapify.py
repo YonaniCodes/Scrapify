@@ -47,12 +47,11 @@ def scrape(urls, scraper="unknown"):
             print("no data")
 
 
-from datetime import datetime
-
+scrape(["https://ndcoilknkl"])
 class ScrapeManager:
     def __init__(self):
-        self.scraped = []
-        self.unscraped = []
+        self.scraped = get_all_scraped_websites()
+        self.unscraped = get_all_unscraped_websites()
     def get_scraped(self):
         """Returns the list of scraped websites."""
         return self.scraped
@@ -60,3 +59,5 @@ class ScrapeManager:
     def get_unscraped(self):
         """Returns the list of unscraped websites."""
         return self.unscraped
+
+scrape(["https://fetena.net/books_asset/books_27/collection/grade%2010-amharic_fetena_net_1096.pdf"])
