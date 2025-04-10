@@ -22,16 +22,17 @@ def register_scraped_website(website_url, scraper_name):
         print(f"✅ Successfully registered: {website_url}")
         return True
     
-def register_unscraped_website(website_url):
+def register_unscraped_website(website_url,reason):
     if is_registered(website_url):
         print(f"❌ This website has already been registered: {website_url}")
     else:
         # Add new entry
         db.collection("unscraped_websites").add({
             "url": website_url,
-            "timestamp": firestore.SERVER_TIMESTAMP
+            "timestamp": firestore.SERVER_TIMESTAMP,
+            "reason":reason
         })
-        print(f"✅ Successfully registered: {website_url}")
+        print(f"✅ Successfully unscraped web registered: {website_url}")
         return True
 
 def is_registered(website_url):
