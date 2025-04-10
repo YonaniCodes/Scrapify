@@ -66,5 +66,5 @@ def get_all_scraped_websites():
 # Function to get all unscraped websites
 def get_all_unscraped_websites():
     unscraped_websites = db.collection("unscraped_websites").stream()
-    websites = [{"url": doc.to_dict()["url"], "timestamp": doc.to_dict()["timestamp"]} for doc in unscraped_websites]
+    websites = [{"url": doc.to_dict()["url"], "timestamp": doc.to_dict()["timestamp"],"reason": doc.to_dict()["reason"],} for doc in unscraped_websites]
     return websites
