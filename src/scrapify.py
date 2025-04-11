@@ -11,14 +11,22 @@ from functions import (
     extract_from_pdf,
     extract_from_web,
     is_pdf,
-    save_to_jsonl
+    save_to_jsonl,
+    is_valid_url
 )
 
 def scrape(urls, scraper="unknown"):
+
+    if not isinstance(urls, list):
+        raise ValueError("Expected a list of URLs.")
+
  
     for url in urls:
         print(f"Processing: {url}")
-        
+
+        if not is_valid_url(url):
+            print(f"Skipping invalid URL: {url}")
+            continue
         if is_registered(url):
             print("⚠️ URL is already registered, skipping.")
             continue
@@ -58,3 +66,5 @@ def get_report():
     unscraped_websites = get_all_unscraped_websites()
     return scraped_websites,unscraped_websites
 
+print(get_report())
+scrape(["yonas"])

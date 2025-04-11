@@ -7,6 +7,9 @@ from bs4 import BeautifulSoup
 import  fitz  # PyMuPDF
 import json
 import langid
+from urllib.parse import urlparse
+
+ 
  
 headers = {'User-Agent': 'Mozilla/5.0'}
 
@@ -95,3 +98,12 @@ def save_to_jsonl(data, filename="data/extracted_data.jsonl"):
     print(f"Saved {len(data)} records to {filename}")
 
 
+def is_valid_url(url):
+    """Check if the URL has a valid format (scheme and netloc)."""
+    try:
+        parsed = urlparse(url)
+        return all([parsed.scheme, parsed.netloc])
+    except:
+        return False
+
+ 
