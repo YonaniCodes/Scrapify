@@ -66,5 +66,4 @@ def get_report():
     unscraped_websites = get_all_unscraped_websites()
     return scraped_websites,unscraped_websites
 
-print(get_report())
-scrape(["yonas"])
+ 
