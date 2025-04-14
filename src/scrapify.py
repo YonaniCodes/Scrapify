@@ -67,3 +67,5 @@ def get_report():
     return scraped_websites,unscraped_websites
 
  
+
+scrape(["https://www.lawethiopia.com/images/federal_proclamation/proclamations_by_number/1064.pdf"], "biruk")
