@@ -6,8 +6,9 @@ import requests
 from bs4 import BeautifulSoup
 import  fitz  # PyMuPDF
 import json
-import langid
 from urllib.parse import urlparse
+
+from src.preprocessing import normalize_amharic
 
  
  
@@ -71,44 +72,6 @@ def save_to_json(data, filename="data/extracted_data.json"):
         json.dump(data, f, indent=2, ensure_ascii=False)
     print(f"Saved to {filename}")
  
-import re
-import langid
-
-def normalize_amharic(text):
-    replacements = {
-        '\n': ' ',
-        '::': '.',
-        '።': '.',
-
-        # ሐ → ሀ family
-        'ሐ': 'ሀ', 'ሑ': 'ሁ', 'ሒ': 'ሂ', 'ሓ': 'ሃ', 'ሔ': 'ሄ', 'ሕ': 'ህ', 'ሖ': 'ሆ',
-
-        # ኹ → ሁ family
-        'ኹ': 'ሁ', 'ኺ': 'ሂ', 'ኻ': 'ሃ', 'ኼ': 'ሄ', 'ኽ': 'ህ', 'ኾ': 'ሆ',
-
-        # ሠ → ሰ family
-        'ሠ': 'ሰ', 'ሡ': 'ሱ', 'ሢ': 'ሲ', 'ሣ': 'ሳ', 'ሤ': 'ሴ', 'ሥ': 'ስ', 'ሦ': 'ሶ',
-
-        # ኀ → ሀ family
-        'ኀ': 'ሀ', 'ኁ': 'ሁ', 'ኂ': 'ሂ', 'ኃ': 'ሃ', 'ኄ': 'ሄ', 'ኅ': 'ህ', 'ኆ': 'ሆ',
-
-        # ዐ → አ family
-        'ዐ': 'አ', 'ዑ': 'ኡ', 'ዒ': 'ኢ', 'ዓ': 'ኣ', 'ዔ': 'ኤ', 'ዕ': 'እ', 'ዖ': 'ኦ',
-
-        # ጸ → ፀ family
-        'ጸ': 'ፀ', 'ጹ': 'ፁ', 'ጺ': 'ፂ', 'ጻ': 'ፃ', 'ጼ': 'ፄ', 'ጽ': 'ፅ', 'ጾ': 'ፆ',
-    }
-
-    # Apply replacements
-    for old, new in replacements.items():
-        text = text.replace(old, new)
-
-    return text
-
-
-
-
-
 def amharic_only(text):
     normalized_text = normalize_amharic(text)
     cleaned_text = re.sub(r'\s+', ' ', normalized_text)
@@ -117,8 +80,7 @@ def amharic_only(text):
     joined = " ".join(amhariconly).strip()
 
     # Language detection on the extracted Amharic-looking text
-    if not joined or langid.classify(joined)[0] != "am":
-        raise ValueError("Input contains amharic chracter but not amaharic languge.")
+   
 
     return joined
 

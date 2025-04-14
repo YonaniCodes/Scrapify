@@ -68,4 +68,3 @@ def get_report():
 
  
 
-scrape(["https://www.lawethiopia.com/images/federal_proclamation/proclamations_by_number/1064.pdf"], "biruk")
