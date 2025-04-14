@@ -1,3 +1,6 @@
+import re
+
+    # normalizing
 def normalize_amharic(text):
     replacements = {
         '\n': ' ',
@@ -28,3 +31,9 @@ def normalize_amharic(text):
         text = text.replace(old, new)
 
     return text
+
+    # cleaning
+def cleaned_and_normalized_text(text):
+    cleaned_text = re.sub(r'\s+', ' ', normalize_amharic(text))
+
+    return cleaned_text

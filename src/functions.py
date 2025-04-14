@@ -73,10 +73,8 @@ def save_to_json(data, filename="data/extracted_data.json"):
     print(f"Saved to {filename}")
  
 def amharic_only(text):
-    normalized_text = normalize_amharic(text)
-    cleaned_text = re.sub(r'\s+', ' ', normalized_text)
     # Extract Amharic script characters
-    amhariconly = re.findall(r'[\u1200-\u137F\u1370-\u137C\u2160-\u217F0-9፡።፣፤፥፦፧፨]+', cleaned_text)
+    amhariconly = re.findall(r'[\u1200-\u137F\u1370-\u137C\u2160-\u217F0-9፡።፣፤፥፦፧፨]+', text.replace('\n', ' '))
     joined = " ".join(amhariconly).strip()
 
     # Language detection on the extracted Amharic-looking text
