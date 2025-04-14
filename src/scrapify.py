@@ -48,7 +48,7 @@ def scrape(urls, scraper="unknown"):
                 record = {
                     "url": url,
                     "scraper": scraper,
-                    "content": amharic_content[:2000]  # Truncate long texts
+                    "content": amharic_content  # Truncate long texts
                 }
 
                 save_to_jsonl([record])  # Save as a list of one dict (for JSONL)
