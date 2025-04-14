@@ -7,8 +7,7 @@ from bs4 import BeautifulSoup
 import  fitz  # PyMuPDF
 import json
 from urllib.parse import urlparse
-
-from src.preprocessing import normalize_amharic
+ 
 
  
  
