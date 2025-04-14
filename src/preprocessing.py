@@ -34,6 +34,6 @@ def normalize_amharic(text):
 
     # cleaning
 def cleaned_and_normalized_text(text):
-    cleaned_text = re.sub(r'\s+', ' ', normalize_amharic(text))
+   
 
     return cleaned_text

@@ -71,13 +71,28 @@ def save_to_json(data, filename="data/extracted_data.json"):
         json.dump(data, f, indent=2, ensure_ascii=False)
     print(f"Saved to {filename}")
  
-def amharic_only(text):
-    # Extract Amharic script characters
-    amhariconly = re.findall(r'[\u1200-\u137F\u1370-\u137C\u2160-\u217F0-9፡።፣፤፥፦፧፨]+', text.replace('\n', ' '))
-    joined = " ".join(amhariconly).strip()
+def is_amharic(token):
+    return re.search(r'[\u1200-\u137F]', token) is not None
 
-    # Language detection on the extracted Amharic-looking text
-   
+def is_punct_or_number(token):
+    return re.fullmatch(r'[0-9፡።፣፤፥፦፧፨.,:;!?\'"()\-]+', token) is not None
+
+def amharic_only(text):
+    # Tokenize text into words and symbols
+    tokens = re.findall(r'\w+|[^\w\s]', text)
+ 
+    filtered = []
+    for i, token in enumerate(tokens):
+        if is_amharic(token):
+            filtered.append(token)
+        elif is_punct_or_number(token):
+            prev = tokens[i - 1] if i > 0 else ''
+            next_ = tokens[i + 1] if i < len(tokens) - 1 else ''
+            if is_amharic(prev) or is_amharic(next_):
+                filtered.append(token)
+    
+    joined = re.sub(r'\s+', ' ', text)
+    joined = ' '.join(filtered).strip()
 
     return joined
 
