@@ -4,9 +4,7 @@ import re
 def normalize_amharic(text):
     replacements = {
         '\n': ' ',
-        '::': '.',
-        '።': '.',
-
+        '::': '።',
         # ሐ → ሀ family
         'ሐ': 'ሀ', 'ሑ': 'ሁ', 'ሒ': 'ሂ', 'ሓ': 'ሃ', 'ሔ': 'ሄ', 'ሕ': 'ህ', 'ሖ': 'ሆ',
 
