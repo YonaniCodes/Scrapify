@@ -30,8 +30,4 @@ def normalize_amharic(text):
 
     return text
 
-    # cleaning
-def cleaned_and_normalized_text(text):
-   
-
-    return cleaned_text
+ 
