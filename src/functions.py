@@ -21,7 +21,7 @@ def extract_from_web(url):
 
     soup = BeautifulSoup(response.text,'html.parser')
     paragraphs = soup.find_all([
-        'p', 'div', 'span', 'li', 'article', 'section', 'header', 'footer',
+        'p', 'div', 'span', 'li', 'article', 'section',  ,
         'main', 'aside', 'blockquote', 'pre'
         , 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
     ])
