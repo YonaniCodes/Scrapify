@@ -79,6 +79,7 @@ def is_punct_or_number(token):
 
 def amharic_only(text):
     # Tokenize text into words and symbols
+    text = re.sub(r':\s*:', '።', text)
     tokens = re.findall(r'\w+|[^\w\s]', text)
  
     filtered = []
