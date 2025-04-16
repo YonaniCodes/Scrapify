@@ -4,14 +4,6 @@ import re
 def normalize_amharic(text):
     replacements = {
         '\n': ' ',
-        '::': '።',
-        ': :': '።',
-        ' ፡፡ ': '።',
-        ' ፡ ፡': '።',
-        ': : ': '።',
-        '፡ ፡': '።',
-        ' ፡ ፡ ': '።',
-        '. ፡ ፡': '።',
         # ሐ → ሀ family
         'ሐ': 'ሀ', 'ሑ': 'ሁ', 'ሒ': 'ሂ', 'ሓ': 'ሃ', 'ሔ': 'ሄ', 'ሕ': 'ህ', 'ሖ': 'ሆ',
 
@@ -31,10 +23,34 @@ def normalize_amharic(text):
         'ጸ': 'ፀ', 'ጹ': 'ፁ', 'ጺ': 'ፂ', 'ጻ': 'ፃ', 'ጼ': 'ፄ', 'ጽ': 'ፅ', 'ጾ': 'ፆ',
     }
 
+    normalize_sentence_ending(text)
+
     # Apply replacements
     for old, new in replacements.items():
         text = text.replace(old, new)
 
     return text
 
- 
+    def normalize_sentence_ending(text):
+        # Replace ": :" (with optional spaces) → "።"
+        text = re.sub(r':\s*:', '።', text)
+    
+        # Replace "፡ ፡" (with optional spaces) → "።"
+        text = re.sub(r'፡\s*፡', '።', text)
+    
+        # Replace ". ፡ ፡" (with optional spaces) → "።"
+        text = re.sub(r'\.\s*፡\s*፡', '።', text)
+    
+        # Remove any period before "፡ ፡" and replace with "።"
+        text = re.sub(r'\.\s*፡\s*፡', '።', text)
+    
+        # Remove duplicate full stops ("።።" → "።")
+        text = re.sub(r'።{2,}', '።', text)
+    
+        # Tidy spaces around ። (keep one space before and after it)
+        text = re.sub(r'\s*።\s*', ' ። ', text)
+    
+        # Replace multiple spaces with one space
+        text = re.sub(r'\s{2,}', ' ', text)
+    
+        return text.strip()
