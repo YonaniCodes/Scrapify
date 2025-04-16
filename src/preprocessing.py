@@ -23,7 +23,7 @@ def normalize_amharic(text):
         'ጸ': 'ፀ', 'ጹ': 'ፁ', 'ጺ': 'ፂ', 'ጻ': 'ፃ', 'ጼ': 'ፄ', 'ጽ': 'ፅ', 'ጾ': 'ፆ',
     }
 
-    normalize_sentence_ending(text)
+    text=normalize_sentence_ending(text)
 
     # Apply replacements
     for old, new in replacements.items():
