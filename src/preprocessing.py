@@ -41,5 +41,6 @@ def normalize_amharic(text):
     # Apply character family replacements
     for old, new in replacements.items():
         text = text.replace(old, new)
+    text= remove_brackets(text)
 
     return text
