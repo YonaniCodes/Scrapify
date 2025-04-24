@@ -1,4 +1,8 @@
 import re
+#Function to remove brackets
+def remove_brackets(text):
+    text = re.sub(r'\(\s*\)', '', text)
+    return text
 
 # Function to normalize sentence endings
 def normalize_sentence_ending(text):
