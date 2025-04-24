@@ -28,7 +28,7 @@ def normalize_sentence_ending(text):
 # Main function to normalize Amharic text
 def normalize_amharic(text):
     replacements = {
-        '\n': ' ',
+        '\n': ' '
     }
 
     # Apply sentence-ending normalization
