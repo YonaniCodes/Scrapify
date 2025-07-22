@@ -1,6 +1,6 @@
 # 🕸️ Scrapify
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YonaniCodes/Scrapify/blob/main/notebooks/scrapify-demo.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YonaniCodes/Scrapify/blob/main/notebooks/scrapify_demo.ipynb)
 
 Scrapify is a lightweight and customizable Python web scraper for collecting data from websites with minimal setup. Ideal for quick scraping tasks, educational purposes, and rapid prototyping.
 
